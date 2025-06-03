@@ -1,0 +1,59 @@
+:root {
+  --branco: #ffffff;
+  --verde: #00db1d;
+  --preto: #000000;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI";
+}
+
+#cabecalho {
+  background-image: linear-gradient(to bottom, var(--verde), rgb(4, 71, 14));
+  color: var(--branco);
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+#cabecalho h2 {
+  line-height: 50px;
+  font-style: italic;
+}
+
+#caixa_menu {
+  display: flex;
+  gap: 30px;
+}
+
+#tela_escura {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+}
+
+#formulario_cad_eng,
+#formulario_cad_proj {
+  background-color: var(--branco);
+  border-radius: 10px;
+  width: fit-content;
+  height: fit-content;
+  padding: 40px;
+}
