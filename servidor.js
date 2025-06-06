@@ -18,27 +18,78 @@ app.use(session({
   cookie: { maxAge: 15 * 60 * 1000 }
 }));
 
-// Pagina principal
+// Página principal
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'privado', 'index.html'))
 })
 
+// Página de gerenciamento de projetos
+app.get('/projetos', (req, res) => {
+  res.sendFile(path.join(__dirname, 'privado', 'projetos.html'))
+})
+
+// Endpoint p consultar engenheiros
 app.get('/engenheiros', (req, res) => {
   db.query('SELECT * FROM tb_engenheiros', (erro, resultado) => {
-    if (erro) { return res.json({ msg: 'Falha ao consultar os engenheiros' }) }
+    if (erro) { return res.json({ msg: 'Falha ao consultar os  engeheiros' + erro.message }) }
     return res.json(resultado)
   })
 })
 
-// Endpoint p cadastro
+// Endpoint p cadastro de projetos
 app.post('/projetos', (req, res) => {
   const { nome_projeto, fk_id_engenheiro, situacao, descricao } = req.body;
-  db.query(`INSET INTO tb_projetos 
-  (nome_projeto, fk_id_engenheiro, situacao, descricao) VALUES (?, ?, ?, ?)`,
+  db.query(
+    'INSERT INTO tb_projetos (nome_projeto, fk_id_engenheiro, situacao, descricao) VALUES (?,?,?,?)',
     [nome_projeto, fk_id_engenheiro, situacao, descricao],
     (erro, resultado) => {
-      if(erro){return res.json({msg:"Falha ao cadastrar"+erro.message})}
-      return res.json({msg:"Cadastrado com"})
+      if (erro) {
+        return res.json({ msg: 'Falha ao cadastrar o projeto: ' + erro.message });
+      }
+      return res.json({ msg: 'Cadastrado com sucesso!' });
+    }
+  );
+});
+
+// Endpoint p cadastro de engenheiros
+app.post('/engenheiro', (req, res) => {
+  const { nome_engenheiro } = req.body;
+  db.query('INSERT INTO tb_engenheiros (nome_engenheiro) VALUES (?)',
+    [nome_engenheiro],
+    (erro, resultado) => {
+      if (erro) { return res.json({ msg: "Falha ao cadastrar" + erro.message }) }
+      return res.json({ msg: "Cadastrar com sucesso" })
+
+    })
+})
+
+// Endpoint p consulta de projetos pendentes
+app.get('/projetos_pendentes', (req, res) => {
+  db.query(`SELECT * FROM vw_proj_eng WHERE situacao='Pendente'`,
+    (erro, resultado) => {
+      if (erro) { return res.json({ msg: "Falha ao consultar!" + erro.message }) }
+      if (resultado.length == 0) { return res.json({ msg: "Não há projetos pendentes" }) }
+      return res.json(resultado)
+    })
+})
+
+// Endpoint p consulta de projetos em andamento
+app.get('/projetos_em_andamento', (req, res) => {
+  db.query(`SELECT * FROM vw_proj_eng WHERE situacao='Em andamento'`,
+    (erro, resultado) => {
+      if (erro) { return res.json({ msg: "Falha ao consultar!" + erro.message }) }
+      if (resultado.length == 0) { return res.json({ msg: "Não há projetos em andamento" }) }
+      return res.json(resultado)
+    })
+})
+
+// Endpoint p consulta de projetos finalizados
+app.get('/projetos_finalizados', (req, res) => {
+  db.query(`SELECT * FROM vw_proj_eng WHERE situacao='Finalizado'`,
+    (erro, resultado) => {
+      if (erro) { return res.json({ msg: "Falha ao consultar!" + erro.message }) }
+      if (resultado.length == 0) { return res.json({ msg: "Não há projetos finalizados" }) }
+      return res.json(resultado)
     })
 })
 

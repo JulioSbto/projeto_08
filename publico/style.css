@@ -1,6 +1,7 @@
 :root {
   --branco: #ffffff;
   --verde: #00db1d;
+  --azul: #4369f6;
   --preto: #000000;
 }
 
@@ -52,6 +53,7 @@ body {
 
 #formulario_cad_eng,
 #formulario_cad_proj {
+  position: relative;
   background-color: var(--branco);
   border-radius: 10px;
   width: fit-content;
@@ -60,7 +62,7 @@ body {
   box-shadow: 0px 0px 10px var(--preto);
 }
 
-.menus:hover{
+.menus:hover {
   cursor: pointer;
   text-decoration: underline;
 }
@@ -72,10 +74,52 @@ button {
   border: none;
   border-radius: 10px;
   font-weight: 500;
-
 }
 
 button:hover {
   filter: contrast(10);
   cursor: pointer;
+}
+
+#btn_fechar_eng,
+#btn_fechar_proj {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+#conteudo_pagina {
+  border: 1px solid red;
+  min-height: 800px;
+}
+
+#conteudo {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 25px;
+}
+
+#pendente,
+#finalizado,
+#em_andamento {
+  border: 1px solid gray;
+  width: 30%;
+  min-height: 500px;
+}
+
+.cartoes {
+  background-color: var(--branco);
+  box-shadow: 0px 0px 5px var(--verde);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.cartoes:hover {
+  scale: 0.8;
+  cursor: pointer;
+  background-color: var(--verde);
+  color: var(--branco);
 }
