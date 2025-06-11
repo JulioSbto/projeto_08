@@ -19,42 +19,77 @@
       </div>
     </header>
 
-    <!-- Tela de cadastro de engenheiros -->
-
     <div id="tela_escura">
+      <!-- Tela de cadastro de engenheiros -->
       <div id="formulario_cad_eng">
         <button id="btn_fechar_eng">X</button>
         <h1>Cadastrar Engenheiro</h1>
-        Nome completo: <br />
-        <input type="text" id="caixa_nome_eng" /> <br /><br />
+        <br>
+        Nome completo: <br>
+        <input type="text" id="caixa_nome_eng" />
+        <br><br>
         <button id="btn_cadastrar_eng">Cadastrar</button>
       </div>
 
+      <!-- Tela de cadastro de projetos -->
       <div id="formulario_cad_proj">
         <button id="btn_fechar_proj">X</button>
         <h1>Cadastrar Projeto</h1>
+        <br>
+        <label>Nome do projeto</label><br>
+        <input type="text" id="caixa_nome" /> <br><br>
 
-        <label>Nome do projeto</label><br />
-        <input type="text" id="caixa_nome" /> <br /><br />
+        <label>Descrição:</label> <br>
+        <input type="text" name="" id="caixa_descricao" /> <br><br>
 
-        <label>Descrição:</label> <br />
-        <input type="text" name="" id="caixa_descricao" /> <br /><br />
-
-        <label>Engenheiro:</label> <br />
+        <label>Engenheiro:</label> <br>
         <select id="caixa_engenheiro"></select>
-        <br /><br />
+        <br><br>
 
-        <label>Situação:</label> <br />
+        <label>Situação:</label> <br>
         <select id="caixa_situacao">
           <option value="">Selecione</option>
           <option value="Pendente">Pendente</option>
           <option value="Em andamento">Em andamento</option>
           <option value="Finalizado">Finalizado</option>
         </select>
-        <br /><br />
+        <br><br>
 
         <button id="btn_cadastrar_proj">Cadastrar</button>
       </div>
+
+      <!-- Tela de edição de projetos -->
+      <div id="formulario_editar_projeto">
+        <button id="btn_fechar_editar">X</button>
+        <h1>Editar/Deletar</h1>
+        <br>
+        <input type="text" id="caixa_cod_projeto2" /> 
+        <br><br>
+
+        Nome do projeto: <br>
+        <input type="text" id="caixa_nome2" /> 
+        <br><br>
+
+        Descrição: <br>
+        <input type="text" id="caixa_descricao2" /> 
+        <br><br>
+
+        Engenheiro: <br>
+        <select id="caixa_engenheiro2"></select>
+        <br><br>
+
+        Situação: <br>
+        <select id="caixa_situacao2">
+          <option value="">Selecione</option>
+          <option value="Pendente">Pendente</option>
+          <option value="Em andamento">Em andamento</option>
+          <option value="Finalizado">Finalizado</option>
+        </select>
+        <br><br>
+        <button id="btn_salvar">Salvar Alterações</button>
+        <button id="btn_deletar">Deletar</button>
+      </div>
+
     </div>
 
     <section id="conteudo_pagina"></section>

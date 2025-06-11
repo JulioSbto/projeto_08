@@ -52,7 +52,8 @@ body {
 }
 
 #formulario_cad_eng,
-#formulario_cad_proj {
+#formulario_cad_proj,
+#formulario_editar_projeto {
   position: relative;
   background-color: var(--branco);
   border-radius: 10px;
@@ -82,14 +83,15 @@ button:hover {
 }
 
 #btn_fechar_eng,
-#btn_fechar_proj {
+#btn_fechar_proj,
+#btn_fechar_editar {
   position: absolute;
   top: 10px;
   right: 10px;
 }
 
 #conteudo_pagina {
-  border: 1px solid red;
+/*  border: 1px solid red;  */
   min-height: 800px;
 }
 
@@ -98,6 +100,11 @@ button:hover {
   justify-content: center;
   gap: 50px;
   margin-top: 25px;
+}
+
+#conteudo h1 {
+  margin-left: 20px;
+  margin-top: 20px;
 }
 
 #pendente,
@@ -113,13 +120,23 @@ button:hover {
   box-shadow: 0px 0px 5px var(--verde);
   padding: 20px;
   border-radius: 10px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin: 20px;
+  transition: all 0.3s;
 }
 
 .cartoes:hover {
-  scale: 0.8;
+  margin: 20px 0px 20px 0px;
   cursor: pointer;
   background-color: var(--verde);
   color: var(--branco);
+}
+
+#login{
+  width: fit-content;
+  height: fit-content;
+  box-shadow: 0px 0px 10px var(--verde);
+  padding: 20px;
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 30vh;
 }

@@ -23,9 +23,16 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'privado', 'index.html'))
 })
 
-// Página de gerenciamento de projetos
-app.get('/projetos', (req, res) => {
-  res.sendFile(path.join(__dirname, 'privado', 'projetos.html'))
+// Endpoint p cadastro de engenheiros
+app.post('/engenheiro', (req, res) => {
+  const { nome_engenheiro } = req.body;
+  db.query('INSERT INTO tb_engenheiros (nome_engenheiro) VALUES (?)',
+    [nome_engenheiro],
+    (erro, resultado) => {
+      if (erro) { return res.json({ msg: "Falha ao cadastrar" + erro.message }) }
+      return res.json({ msg: "Cadastrar com sucesso" })
+
+    })
 })
 
 // Endpoint p consultar engenheiros
@@ -34,6 +41,11 @@ app.get('/engenheiros', (req, res) => {
     if (erro) { return res.json({ msg: 'Falha ao consultar os  engeheiros' + erro.message }) }
     return res.json(resultado)
   })
+})
+
+// Página de gerenciamento de projetos
+app.get('/projetos', (req, res) => {
+  res.sendFile(path.join(__dirname, 'privado', 'projetos.html'))
 })
 
 // Endpoint p cadastro de projetos
@@ -50,18 +62,6 @@ app.post('/projetos', (req, res) => {
     }
   );
 });
-
-// Endpoint p cadastro de engenheiros
-app.post('/engenheiro', (req, res) => {
-  const { nome_engenheiro } = req.body;
-  db.query('INSERT INTO tb_engenheiros (nome_engenheiro) VALUES (?)',
-    [nome_engenheiro],
-    (erro, resultado) => {
-      if (erro) { return res.json({ msg: "Falha ao cadastrar" + erro.message }) }
-      return res.json({ msg: "Cadastrar com sucesso" })
-
-    })
-})
 
 // Endpoint p consulta de projetos pendentes
 app.get('/projetos_pendentes', (req, res) => {
@@ -90,6 +90,44 @@ app.get('/projetos_finalizados', (req, res) => {
       if (erro) { return res.json({ msg: "Falha ao consultar!" + erro.message }) }
       if (resultado.length == 0) { return res.json({ msg: "Não há projetos finalizados" }) }
       return res.json(resultado)
+    })
+})
+
+// Endpoint p editar um projeto
+app.put('/alterar_projeto', (req, res) => {
+  const { id_projeto, nome_projeto, fk_id_engenheiro, situacao, descricao } = req.body;
+  db.query(`UPDATE tb_projetos SET nome_projeto=?, fk_id_engenheiro=?, situacao=?, descricao=? WHERE id_projeto=?`,
+    [nome_projeto, fk_id_engenheiro, situacao, descricao, id_projeto],
+    (erro, resultado) => {
+      if (erro) { return res.json({ msg: "Falha ao atualizar!" + erro.message }) }
+      if (resultado.affectedRows == 0) { return res.json({ msg: "Nada alterado!" }) }
+      return res.json({ msg: "Atualizado com sucesso!" })
+    })
+})
+
+// Endpoint p deletar projetos
+app.delete('/deletar_projeto/:id_projeto', (req, res) => {
+  const { id_projeto } = req.params;
+  db.query(`DELETE FROM tb_projetos WHERE id_projeto=?`, [id_projeto],
+    (erro, resultado) => {
+      if (erro) { return res.json({ msg: "Falha ao deletar!" + erro.message }) }
+      if (resultado.affectedRows == 0) { return res.json({ msg: "Nada alterado!" }) }
+      return res.json({ msg: "Deletado com sucesso!" })
+    })
+})
+
+// Endpoint p fazer login
+app.post('/fazer_login', (req, res) => {
+  const { username, password } = req.body;
+  db.query(`SELECT * FROM tb_usuario WHERE username=? AND password=?`,
+    [username, password], (erro, resultado) => {
+      if (erro) { return res.send("Falha no login!" + erro.message) }
+      if (resultado.length >= 1) {
+        req.session.usuarioLogado = "Sim"
+        res.redirect('/')
+      } else {
+        res.send('Usuario e/ou senha incorretos')
+      }
     })
 })
 

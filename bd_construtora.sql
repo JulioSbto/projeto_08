@@ -26,7 +26,7 @@ INSERT INTO tb_projetos (nome_projeto, descricao, fk_id_engenheiro) VALUES
 
 SELECT * FROM tb_projetos;
 
-CREATE VIEW vw_proj_eng AS 
+CREATE VIEW vw_proj_eng AS
 SELECT * FROM tb_projetos 
 LEFT JOIN tb_engenheiros 
 ON tb_projetos.fk_id_engenheiro = tb_engenheiros.id_engenheiro;
