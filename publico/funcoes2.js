@@ -17,10 +17,10 @@ function carregarPendentes() {
                     <b>Nº </b> <span id='id_projeto'>${item.id_projeto}</span> <br>
                     
                     Nome do projeto:
-                    <span id='nome_projeto'> ${item.nome_projeto}</span> <br>
+                    <span id='nome_projeto'>${item.nome_projeto}</span> <br>
                     
                     Descrição:
-                    <span id='descricao'> ${item.descricao} </span> <br>
+                    <span id='descricao'>${item.descricao}</span> <br>
                     
                     Situação:
                     <span id='situacao'>${item.situacao}</span> <br>
@@ -58,10 +58,10 @@ function carregarEmAndamento() {
                     <b>Nº </b> <span id='id_projeto'>${item.id_projeto}</span> <br>
                     
                     Nome do projeto:
-                    <span id='nome_projeto'> ${item.nome_projeto}</span> <br>
+                    <span id='nome_projeto'>${item.nome_projeto}</span> <br>
                     
                     Descrição:
-                    <span id='descricao'> ${item.descricao} </span> <br>
+                    <span id='descricao'>${item.descricao}</span> <br>
                     
                     Situação:
                     <span id='situacao'>${item.situacao}</span> <br>

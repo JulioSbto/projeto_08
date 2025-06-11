@@ -33,3 +33,13 @@ ON tb_projetos.fk_id_engenheiro = tb_engenheiros.id_engenheiro;
 
 SHOW TABLES;
 SELECT * FROM vw_proj_eng;
+
+USE bd_construtora;
+CREATE TABLE tb_usuarios(
+	id_usuario INT PRIMARY KEY AUTO_INCREMENT,
+	username VARCHAR (15) NOT NULL,
+    password VARCHAR (15) NOT NULL
+);
+
+INSERT INTO tb_usuarios (username, password) VALUES
+('admin','1234');
